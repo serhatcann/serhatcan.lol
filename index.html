@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Websocket Example</title>
+  </head>
+  <body>
+    <h1>Websocket Example</h1>
+    <p>This is a websocket example</p>
+  </body>
+    <script>
+      const proto = window.location.protocol === 'https:' ? 'wss' : 'ws'
+      const ws = new WebSocket(`${proto}://${window.location.host}`)
+
+      ws.onmessage = function(event) {
+        console.log(event.data)
+      }
+      ws.onopen = function(event) {
+        console.log('Connected to server')
+      }
+      ws.onclose = function(event) {
+        console.log('Disconnected from server')
+      }
+      ws.onerror = function(event) {
+        console.log('Error: ', event)
+      }
+      function sendMessage() {
+        ws.send(document.getElementById('message').value)
+      }
+    </script>
+</html>
